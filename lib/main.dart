@@ -25,14 +25,31 @@ class MyApp extends StatelessWidget {
           //auth.isAuth it coming from auth.dart
           home: auth.isAuth
               ? HomeScreen()
+
               : FutureBuilder(
                   future: auth.tryautoLogin(),
                   builder: (ctx, snapshot) =>
                       snapshot.connectionState == ConnectionState.waiting
                           ? SplashScreen()
                           : LoginScreen(),
+
                 ),
         ),
+      ),
+    );
+  }
+}
+class MySecondClass extends StatefulWidget {
+  @override
+  _MySecondClassState createState() => _MySecondClassState();
+}
+
+class _MySecondClassState extends State<MySecondClass> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Screen Text"),
       ),
     );
   }
