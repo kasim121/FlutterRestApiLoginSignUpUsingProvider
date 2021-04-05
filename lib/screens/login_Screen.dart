@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,8 @@ import 'package:rest_api_login/screens/home_Screen.dart';
 import 'package:rest_api_login/screens/signup_screen.dart';
 import 'package:rest_api_login/utils/http_exception.dart';
 import 'package:rest_api_login/widgets/wave_clip_path.dart';
+
+import 'forgetscreen.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -166,7 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                     SizedBox(height: 4.0,),
                             InkWell(
-                              onTap: () { /* ... */ },
+                              onTap: () {  Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => ForgetScreen())); },
                               child: Align(
                                 alignment: Alignment.topRight,
                                 child: Padding(
@@ -189,7 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Align(
                                   alignment: Alignment.topRight,
                                   child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (ctx) => HomeScreen()));
+                                    },
                                     color: Colors.teal.shade300,
                                     textColor: Colors.white,
                                     child: Icon(
@@ -218,7 +225,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               Align(
                                  alignment: Alignment.centerLeft,
                                   child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (ctx) => HomeScreen()));
+                                    },
                                     color: Colors.white,
 
                                     textColor: Colors.redAccent,
@@ -238,7 +248,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               Align(
                                alignment: Alignment.centerRight,
                                 child: MaterialButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (ctx) => HomeScreen()));
+                                  },
                                   color: Colors.white,
 
                                   //textColor: Colors.redAccent,
@@ -260,7 +273,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                     SizedBox(height: 8,),
-                    Row(
+               /*     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(' Already have an account ? ',
@@ -278,7 +291,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
 
-                    )
+                    )*/
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Don\'t have an account?',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 18),
+                                        children: <TextSpan>[
+                                          TextSpan(text: ' Sign up',
+                                              style: TextStyle(
+                                                  color: Colors.blueAccent, fontSize: 18),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                      builder: (ctx) => SignUpScreen()));
+                                                  // navigate to desired screen
+                                                }
+                                          )
+                                        ]
+                                    ),
+                                  ),
+                                )
+                            ),
 
                          ],
                        ),

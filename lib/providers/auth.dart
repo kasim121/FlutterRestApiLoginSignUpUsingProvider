@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:rest_api_login/utils/api.dart';
 import 'package:http/http.dart' as http;
 import 'package:rest_api_login/utils/http_exception.dart';
@@ -135,3 +136,14 @@ class Auth with ChangeNotifier {
     return Authentication(email, password, 'signUp');
   }
 }
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Homepage'),
+      ),
+    );
+  }
+}
+

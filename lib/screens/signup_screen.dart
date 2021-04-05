@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
@@ -61,8 +62,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 clipper: SimpleClipper(),
                 child: Container(
 
-                  height: 200,
-                  width: 500,
+                  height: 150,
+                  width: 380,
 
                   decoration: BoxDecoration(
                     color: Colors.teal.shade300,
@@ -75,12 +76,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
-                  child: Text('Create' 'r'
-                      'Account', style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text('Create'
+                          , style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18
 
-                  ),
+                        ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(' Account',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18
+
+                        ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -169,6 +187,58 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 _authData['password'] = value;
                               },
                             ),
+                            TextFormField(
+                              obscureText: true,
+                              style: TextStyle(color: Colors.black),
+                              decoration: InputDecoration(
+                                labelText: 'Confirm Password',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black),
+                                ),
+                                /* prefixIcon: Icon(
+                                    Icons.vpn_key,
+                                    color: Colors.black,
+                                  )*/),
+                              validator: (value) {
+                                if (value.isEmpty || value.length < 5) {
+                                  return 'Password is to Short';
+                                }
+                              },
+                              onSaved: (value) {
+                                _authData['password'] = value;
+                              },
+                            ),
+                            Column(
+                              children: [
+                                Center(
+                                  child: Row(
+                                    children: [
+                                      Text('     By continuing, you agree to our '),
+                                      Text('Terms of',style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),),
+                                    ],
+                                  ),
+                                ),
+
+                                Row(
+                                  children: [
+                                    Text('              Service ',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),),
+                                    Text('and '),
+                                    Text('Privacy Policy',style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),),
+                                  ],
+                                ),
+
+
+                              ],
+                            ),
                             SizedBox(height: 4.0,),
                          /*   InkWell(
                               onTap: () { *//* ... *//* },
@@ -194,7 +264,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Align(
                                   alignment: Alignment.topRight,
                                   child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (ctx) => HomeScreen()));
+                                    },
                                     color: Colors.teal.shade300,
                                     textColor: Colors.white,
                                     child: Icon(
@@ -265,7 +338,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ],
                             ),
                             SizedBox(height: 8,),
-                            Row(
+                            /*Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(' Already have an account ? ',
@@ -283,6 +356,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ],
 
+                            )*/
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                child: Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Already have an account?',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 18),
+                                        children: <TextSpan>[
+                                          TextSpan(text: ' Sign in',
+                                              style: TextStyle(
+                                                  color: Colors.blueAccent, fontSize: 18),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                      builder: (ctx) => LoginScreen()));
+                                                  // navigate to desired screen
+                                                }
+                                          )
+                                        ]
+                                    ),
+                                  ),
+                                )
                             )
 
                           ],
