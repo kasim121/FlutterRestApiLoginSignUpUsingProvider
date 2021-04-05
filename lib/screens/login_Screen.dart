@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +7,9 @@ import 'package:rest_api_login/providers/auth.dart';
 import 'package:rest_api_login/screens/home_Screen.dart';
 import 'package:rest_api_login/screens/signup_screen.dart';
 import 'package:rest_api_login/utils/http_exception.dart';
+import 'package:rest_api_login/widgets/wave_clip_path.dart';
+
+import 'forgetscreen.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -53,51 +58,46 @@ class _LoginScreenState extends State<LoginScreen> {
       // backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Container(
-          child: Stack(
-            children: <Widget>[
+          child: Column(
+            children: [
+              ClipPath(
+                clipper: MyClipPath(),
+                child: Container(
 
-              Container(
-                height: MediaQuery.of(context).size.height * 0.65,
-                width: MediaQuery.of(context).size.width * 0.85,
+                  height: 300,
+                  width: 500,
+                  child: Center(
+                    child: Text("MY|MARKET",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                      ),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.teal.shade300,
 
+                  ),
+
+                ),
               ),
+
+
               Container(
-                padding:
-                    EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
+                //padding:
+                  //  EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 50),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                  /*  Text(
-                      "Sign In",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 40),
-                    ),*/
-                  /*  SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Sign in with your username or email",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 10),
-                    ),*/
+
                     Form(
                       key: _formKey,
                       child: Container(
-                        padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+                        padding: EdgeInsets.only(top: 15, left: 15, right: 15),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            /*Text(
-                              "Username or Email",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            ),*/
+
                             TextFormField(
 
                               style: TextStyle(color: Colors.black),
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   prefixIcon: Icon(
                                     Icons.mail,
-                                    color: Colors.teal,
+                                      color: Colors.teal.shade300,
                                   )
                               ),
                               validator: (value) {
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
 
-                            SizedBox(height: 20.0,),
+                            SizedBox(height: 5.0,),
 
                             IntlPhoneField(
                               decoration: InputDecoration(
@@ -140,15 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               },
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
-                           /* Text(
-                              "Password",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12),
-                            ),*/
+
                             TextFormField(
                               obscureText: true,
                               style: TextStyle(color: Colors.black),
@@ -173,7 +167,160 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _authData['password'] = value;
                               },
                             ),
+                    SizedBox(height: 4.0,),
+                            InkWell(
+                              onTap: () {  Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => ForgetScreen())); },
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text('Forget Password ?', style: TextStyle(color: Colors.black)),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: Text('Sign in', style: TextStyle(color: Colors.black)),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (ctx) => HomeScreen()));
+                                    },
+                                    color: Colors.teal.shade300,
+                                    textColor: Colors.white,
+                                    child: Icon(
+                                      Icons.arrow_forward,
+                                      size: 30,
+                                    ),
+                                    padding: EdgeInsets.all(10),
+                                    shape: CircleBorder(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          SizedBox(height: 4,),
+                          Row(
+                            children: [
+                              Text("__________"),
+                              Text("          or Login with"),
+                              Text("          __________"),
+                            ],
+                          ),
+                          SizedBox(height: 5,),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Align(
+                                 alignment: Alignment.centerLeft,
+                                  child: MaterialButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (ctx) => HomeScreen()));
+                                    },
+                                    color: Colors.white,
+
+                                    textColor: Colors.redAccent,
+                                      child:
+                                      Image.network(
+                                        'https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/544/Google__G__Logo-512.png',
+                                          height: 40,
+                                          width: 40,
+                                      ),/*ImageIcon(
+                                        AssetImage('<img src="https://img.icons8.com/color/48/000000/google-logo.png"/>'
+                                        ),
+                                      ),*/
+                                    padding: EdgeInsets.all(5),
+                                    shape: CircleBorder(),
+                                  ),
+                                ),
+                              Align(
+                               alignment: Alignment.centerRight,
+                                child: MaterialButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (ctx) => HomeScreen()));
+                                  },
+                                  color: Colors.white,
+
+                                  //textColor: Colors.redAccent,
+                                  child:
+                                  Image.network(
+                                    'https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/80-facebook-512.png',
+                                    height: 40,
+                                    width: 40,
+                                  ),/*ImageIcon(
+                                        AssetImage('<img src="https://img.icons8.com/color/48/000000/google-logo.png"/>'
+                                        ),
+                                      ),*/
+                                  padding: EdgeInsets.all(5),
+                                  shape: CircleBorder(),
+                                ),
+                              ),
+
+
+                            ],
+                          ),
+                    SizedBox(height: 8,),
+               /*     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(' Already have an account ? ',
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (ctx) => SignUpScreen()));
+                          },
+
+                            child: Text('Sign UP', style: TextStyle(color: Colors.black,
+                            fontWeight: FontWeight.bold)
+                            ),
+
+                        ),
+                      ],
+
+                    )*/
                             Container(
+                                padding: EdgeInsets.all(10),
+                                child: Center(
+                                  child: RichText(
+                                    text: TextSpan(
+                                        text: 'Don\'t have an account?',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 18),
+                                        children: <TextSpan>[
+                                          TextSpan(text: ' Sign up',
+                                              style: TextStyle(
+                                                  color: Colors.blueAccent, fontSize: 18),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.of(context).push(MaterialPageRoute(
+                                                      builder: (ctx) => SignUpScreen()));
+                                                  // navigate to desired screen
+                                                }
+                                          )
+                                        ]
+                                    ),
+                                  ),
+                                )
+                            ),
+
+                         ],
+                       ),
+
+                       /*     Container(
                               padding: EdgeInsets.only(top: 40),
                               width: 140,
                               child: RaisedButton(
@@ -189,8 +336,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     style: TextStyle(color: Colors.black),
                                   ),
                                   color: Colors.green),
-                            ),
-                            Align(
+                            ),*/
+                        /*    Align(
                               alignment: Alignment.bottomRight,
                               child: InkWell(
                                 onTap: () {
@@ -208,11 +355,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                            )
-                          ],
+                            )*/
+
                         ),
                       ),
-                    ),
+
                   ],
                 ),
               ),
